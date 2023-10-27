@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/reducers/todo-reducer";
+import { BsFillPlusSquareFill } from "react-icons/bs";
 
 export default function InputTodo() {
   const [input, setInput] = useState("");
@@ -38,11 +39,8 @@ export default function InputTodo() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button
-          className="p-2 bg-black text-white rounded-sm"
-          onClick={inputHandler}
-        >
-          add
+        <button className="h-full text-zinc-800 " onClick={inputHandler}>
+          <BsFillPlusSquareFill className="text-4xl" />
         </button>
       </div>
       {error && (
