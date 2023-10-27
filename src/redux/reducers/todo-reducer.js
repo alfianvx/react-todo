@@ -73,4 +73,22 @@ export const editTodo = (id, todo) => async (dispatch) => {
   dispatch(getTodo());
 };
 
+export const editStatus = (id, status) => async (dispatch) => {
+  dispatch(startFetching());
+
+  await axios.put(`https://65388005a543859d1bb17fc8.mockapi.io/todo/${id}`, {
+    status: status,
+  });
+
+  dispatch(getTodo());
+};
+
+export const getActiveTodo = (status) => async (dispatch) => {
+  dispatch(startFetching());
+
+  await axios.get(
+    `https://65388005a543859d1bb17fc8.mockapi.io/todo?status=${status}`
+  );
+};
+
 export default todoReducer;
