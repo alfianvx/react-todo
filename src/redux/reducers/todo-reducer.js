@@ -1,5 +1,4 @@
 import axios from "axios";
-import { BiDoughnutChart } from "react-icons/bi";
 
 const initialState = {
   todos: [],
