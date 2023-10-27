@@ -4,35 +4,50 @@ import { addTodo } from "../redux/reducers/todo-reducer";
 
 export default function InputTodo() {
   const [input, setInput] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     e.preventDefault();
 
-    let newTodo = {
-      todo: input,
-      status: false,
-    };
+    try {
+      if (input == "") {
+        throw new Error("todo cannot be empty");
+      }
 
-    dispatch(addTodo(newTodo));
-    setInput("");
+      let newTodo = {
+        todo: input,
+        status: true,
+      };
+
+      dispatch(addTodo(newTodo));
+      setInput("");
+      setError("");
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
-    <div className="w-full flex gap-4 mb-10">
-      <input
-        type="text"
-        className="border w-full p-2"
-        placeholder="Add some todo . . . "
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button
-        className="p-2 bg-black text-white rounded-sm"
-        onClick={inputHandler}
-      >
-        add
-      </button>
+    <div className="mb-10">
+      <div className="w-full flex gap-4">
+        <input
+          type="text"
+          className="border w-full p-2"
+          placeholder="Add some todo . . . "
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button
+          className="p-2 bg-black text-white rounded-sm"
+          onClick={inputHandler}
+        >
+          add
+        </button>
+      </div>
+      {error && (
+        <span className="text-red-500 font-semibold text-xs">* {error}</span>
+      )}
     </div>
   );
 }
