@@ -152,9 +152,13 @@ export default function ListTodo() {
                         </button>
                         <span className="p-2">{item.todo}</span>
                       </div>
-                      <div className={item.status ? "flex gap-2" : "hidden"}>
+                      <div className="flex gap-2">
                         <button
-                          className="p-2 bg-zinc-800 text-white rounded-sm"
+                          className={
+                            item.status
+                              ? "p-2 bg-zinc-800 text-white rounded-sm"
+                              : "hidden"
+                          }
                           onClick={() => editTodoHandler(item.id, item.todo)}
                         >
                           <BiSolidPencil className="text-white hover:text-yellow-400" />
